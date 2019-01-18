@@ -9,7 +9,7 @@ namespace Com.Danliris.Service.Inventory.WebApi.Controllers.v1.Loaders.DataMigra
 {
     [Produces("application/json")]
     [ApiVersion("1.0")]
-    [Route("v{version:apiVersion}/migration/inventory-movements")]
+    [Route("v{version:apiVersion}/migration/inventory-summaries")]
     public class InventorySummaryMigrationController : Controller
     {
         private readonly IInventorySummaryMigrationService _service;
