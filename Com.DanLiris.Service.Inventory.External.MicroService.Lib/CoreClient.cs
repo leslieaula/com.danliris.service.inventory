@@ -20,7 +20,7 @@ namespace Com.DanLiris.Service.Inventory.External.MicroService.Lib
 
         public void SetProduct()
         {
-            var masterProductUri = MasterDataSettings.Endpoint + $"master/products/all-selected-models";
+            var masterProductUri = MasterDataSettings.Endpoint + $"master/products/simple";
             var productResponse = _httpClientService.GetAsync(masterProductUri).Result;
 
             var productResult = new ProductResult();

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Com.Danliris.Service.Inventory.Mongo.Lib.MongoModels;
+﻿using Com.Danliris.Service.Inventory.Mongo.Lib.MongoModels;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Com.Danliris.Service.Inventory.Mongo.Lib.MongoRepositories.InventoryDocument
 {
@@ -19,12 +18,20 @@ namespace Com.Danliris.Service.Inventory.Mongo.Lib.MongoRepositories.InventoryDo
         }
         public async Task<IEnumerable<InventoryDocumentMongo>> GetByBatch(int startingNumber, int numberOfBatch)
         {
-            return await _context
+            try
+            {
+                return await _context
                            .InventoryDocuments
-                           .Find(x => !x._deleted)
+                           .AsQueryable()
                            .Skip(startingNumber)
-                           .Limit(numberOfBatch)
+                           .Take(numberOfBatch)
                            .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

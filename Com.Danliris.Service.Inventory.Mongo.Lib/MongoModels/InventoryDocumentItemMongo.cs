@@ -10,13 +10,13 @@ namespace Com.Danliris.Service.Inventory.Mongo.Lib.MongoModels
 
         public string productName { get; set; }
 
-        public int quantity { get; set; }
+        public double quantity { get; set; }
 
         public ObjectId uomId { get; set; }
 
         public string uom { get; set; }
 
-        public int stockPlanning { get; set; }
+        public double stockPlanning { get; set; }
 
         public string remark { get; set; }
     }

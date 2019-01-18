@@ -1,5 +1,7 @@
 ﻿using Com.Danliris.Service.Inventory.Mongo.Lib.MongoModels;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,12 +18,20 @@ namespace Com.Danliris.Service.Inventory.Mongo.Lib.MongoRepositories.InventorySu
         }
         public async Task<IEnumerable<InventorySummaryMongo>> GetByBatch(int startingNumber, int numberOfBatch)
         {
-            return await _context
+            try
+            {
+                return await _context
                            .InventorySummaries
-                           .Find(x => !x._deleted)
+                           .AsQueryable()
                            .Skip(startingNumber)
-                           .Limit(numberOfBatch)
+                           .Take(numberOfBatch)
                            .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

@@ -31,6 +31,8 @@ using Com.DanLiris.Service.Inventory.Data.Migration.Lib.MigrationServices.Invent
 using Com.DanLiris.Service.Inventory.Data.Migration.Lib.MigrationIntegrationServices;
 using FluentScheduler;
 using Com.Danliris.Service.Inventory.WebApi.Helpers.Scheduler;
+using Com.DanLiris.Service.Inventory.External.MicroService.Lib.Cache;
+using Com.DanLiris.Service.Inventory.External.MicroService.Lib.HttpClientService;
 
 namespace Com.Danliris.Service.Inventory.WebApi
 {
@@ -133,6 +135,10 @@ namespace Com.Danliris.Service.Inventory.WebApi
             services.AddTransient<IInventoryDocumentIntegrationMigrationService, InventoryDocumentIntegrationMigrationService>();
             services.AddTransient<IInventoryMovementIntegrationMigrationService, InventoryMovementIntegrationMigrationService>();
             services.AddTransient<IInventorySummaryIntegrationMigrationService, InventorySummaryIntegrationMigrationService>();
+
+            services.AddSingleton<IMemoryCacheManager, MemoryCacheManager>()
+                    .AddSingleton<ICoreClient, CoreClient>()
+                    .AddSingleton<ICacheHttpClientService, CacheHttpClientService>();
 
             var Secret = Configuration.GetValue<string>("Secret") ?? Configuration["Secret"];
             var Key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Secret));

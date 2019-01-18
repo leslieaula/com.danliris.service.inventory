@@ -29,21 +29,29 @@ namespace Com.DanLiris.Service.Inventory.Data.Migration.Lib.MigrationServices.In
 
         public async Task<int> RunAsync(int startingNumber, int numberOfBatch)
         {
-            var extractedData = await _mongoRepository.GetByBatch(startingNumber, numberOfBatch);
-
-            if (extractedData.Count() > 0)
+            try
             {
-                var transformedData = Transform(extractedData);
-                startingNumber += transformedData.Count;
+                var extractedData = await _mongoRepository.GetByBatch(startingNumber, numberOfBatch);
 
-                //Insert into SQL
-                Load(transformedData);
-                TotalInsertedData += transformedData.Count;
+                if (extractedData.Count() > 0)
+                {
+                    var transformedData = Transform(extractedData);
+                    startingNumber += transformedData.Count;
 
-                await RunAsync(startingNumber, numberOfBatch);
+                    //Insert into SQL
+                    Load(transformedData);
+                    TotalInsertedData += transformedData.Count;
+
+                    await RunAsync(startingNumber, numberOfBatch);
+                }
+
+                return TotalInsertedData;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
-            return TotalInsertedData;
         }
 
         private List<InventoryDocument> Transform(IEnumerable<InventoryDocumentMongo> extractedData)
