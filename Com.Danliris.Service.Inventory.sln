@@ -19,6 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{379C64CD
 		Dockerfile.test.build.sh = Dockerfile.test.build.sh
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Danliris.Service.Inventory.Mongo.Lib", "Com.Danliris.Service.Inventory.Mongo.Lib\Com.Danliris.Service.Inventory.Mongo.Lib.csproj", "{425C7F72-9260-4D17-96F0-2888D2F9E661}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.DanLiris.Service.Inventory.External.MicroService.Lib", "Com.DanLiris.Service.Inventory.External.MicroService.Lib\Com.DanLiris.Service.Inventory.External.MicroService.Lib.csproj", "{01EF52D1-9FDD-4F92-8AA6-E41E16102ED7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.DanLiris.Service.Inventory.Data.Migration.Lib", "Com.DanLiris.Service.Inventory.Data.Migration.Lib\Com.DanLiris.Service.Inventory.Data.Migration.Lib.csproj", "{9C6DB650-FD6F-4EDD-A1CB-F9DA99599A54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +43,18 @@ Global
 		{24BB4EF6-5D29-4BA2-AF83-1C7A217B9690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24BB4EF6-5D29-4BA2-AF83-1C7A217B9690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24BB4EF6-5D29-4BA2-AF83-1C7A217B9690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425C7F72-9260-4D17-96F0-2888D2F9E661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425C7F72-9260-4D17-96F0-2888D2F9E661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425C7F72-9260-4D17-96F0-2888D2F9E661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425C7F72-9260-4D17-96F0-2888D2F9E661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01EF52D1-9FDD-4F92-8AA6-E41E16102ED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01EF52D1-9FDD-4F92-8AA6-E41E16102ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01EF52D1-9FDD-4F92-8AA6-E41E16102ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01EF52D1-9FDD-4F92-8AA6-E41E16102ED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C6DB650-FD6F-4EDD-A1CB-F9DA99599A54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C6DB650-FD6F-4EDD-A1CB-F9DA99599A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C6DB650-FD6F-4EDD-A1CB-F9DA99599A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C6DB650-FD6F-4EDD-A1CB-F9DA99599A54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
