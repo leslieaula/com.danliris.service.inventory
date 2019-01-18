@@ -17,7 +17,7 @@ namespace Com.DanLiris.Service.Inventory.Data.Migration.Lib.MigrationServices.In
         private readonly InventoryDbContext _dbContext;
         private readonly DbSet<InventorySummary> _inventorySummaryDbSet;
         
-        public InventorySummaryMigrationService(IInventorySummaryMongoRepository mongoRepository, InventoryDbContext dbContext )
+        public InventorySummaryMigrationService(IInventorySummaryMongoRepository mongoRepository, InventoryDbContext dbContext)
         {
             _mongoRepository = mongoRepository;
             _dbContext = dbContext;
@@ -32,17 +32,44 @@ namespace Com.DanLiris.Service.Inventory.Data.Migration.Lib.MigrationServices.In
 
             if (extractedData.Count() > 0)
             {
-                var transformedData = Transform(extractedData);
-                startingNumber += transformedData.Count;
+                List<InventorySummaryMongo> dataToLoad = new List<InventorySummaryMongo>();
+                foreach(var item in extractedData)
+                {
+                    if (_inventorySummaryDbSet.Any(x => x.ProductCode == item.productCode
+                                                        && x.StorageCode == item.storageCode
+                                                        && x.UomUnit == item.uom))
+                    {
+                        var inventorySummary = _inventorySummaryDbSet.FirstOrDefault(x => x.ProductCode == item.productCode
+                                                        && x.StorageCode == item.storageCode
+                                                        && x.UomUnit == item.uom);
+
+                        inventorySummary.StockPlanning = item.stockPlanning;
+                        inventorySummary.Quantity += item.quantity;
+                    }
+                    else
+                    {
+                        dataToLoad.Add(item);
+                    }
+                }
+
+                await _dbContext.SaveChangesAsync();
+
+                var transformedData = Transform(dataToLoad);
+                startingNumber += extractedData.Count();
 
                 //Insert into SQL
                 Load(transformedData);
-                TotalInsertedData += transformedData.Count;
+                TotalInsertedData += extractedData.Count();
 
                 await RunAsync(startingNumber, numberOfBatch);
             }
 
             return TotalInsertedData;
+        }
+
+        private InventorySummary Transform(InventorySummaryMongo extractedData)
+        {
+            return new InventorySummary(extractedData);
         }
 
         private List<InventorySummary> Transform(IEnumerable<InventorySummaryMongo> extractedData)
