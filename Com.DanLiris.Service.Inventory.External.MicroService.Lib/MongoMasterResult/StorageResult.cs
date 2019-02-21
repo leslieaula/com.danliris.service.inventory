@@ -16,6 +16,8 @@ namespace Com.DanLiris.Service.Inventory.External.MicroService.Lib.MongoMasterRe
     public class Storage
     {
         public int _id { get; set; }
+        public string Name { get; set; }
+        public string Uid { get; set; }
         public string Code { get; set; }
     }
 }

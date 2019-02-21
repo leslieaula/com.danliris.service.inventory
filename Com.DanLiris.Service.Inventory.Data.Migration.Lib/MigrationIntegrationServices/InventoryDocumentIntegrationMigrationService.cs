@@ -50,7 +50,7 @@ namespace Com.DanLiris.Service.Inventory.Data.Migration.Lib.MigrationIntegration
 
             foreach(var inventoryDocument in inventoryDocuments)
             {
-                var storage = Storages.FirstOrDefault(x => x.Code == inventoryDocument.StorageCode);
+                var storage = Storages.FirstOrDefault(x => x.Uid == inventoryDocument.StorageId.ToString());
                 if (storage == null)
                     continue;
 
